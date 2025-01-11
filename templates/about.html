@@ -1,0 +1,37 @@
+
+<!-- templates/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Flower Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>About the Project</h1>
+        <div class="about-content">
+            <h2>Oxford 102 Flower Dataset</h2>
+            <p>This application uses a Convolutional Neural Network (CNN) trained on the Oxford 102 Flower Dataset. The dataset consists of 102 flower categories commonly found in the United Kingdom. Each class consists of between 40 and 258 images.</p>
+            
+            <h2>Technology Stack</h2>
+            <ul>
+                <li>Backend: Flask (Python)</li>
+                <li>Deep Learning: TensorFlow/Keras</li>
+                <li>Frontend: HTML, CSS, JavaScript</li>
+            </ul>
+            
+            <h2>Model Architecture</h2>
+            <p>The model uses a custom CNN architecture optimized for flower classification. It can identify 102 different types of flowers with high accuracy.</p>
+        </div>
+    </div>
+</body>
+</html>

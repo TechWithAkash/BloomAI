@@ -1,0 +1,179 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomAI - Intelligent Flower Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-flower"></i>
+                
+                <span>BloomAI</span>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#try-it">Try It</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Discover the World of Flowers</h1>
+            <p>Advanced AI-powered flower recognition at your fingertips</p>
+            <a href="#try-it" class="cta-button">Get Started</a>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/flowers.png') }}" alt="Flowers illustration">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Why Choose BloomAI?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>Advanced AI Technology</h3>
+                <p>Powered by state-of-the-art deep learning models for accurate recognition</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Instant Results</h3>
+                <p>Get flower identification results in seconds</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-database"></i>
+                <h3>Extensive Database</h3>
+                <p>Comprehensive collection of flower species from around the world</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Friendly</h3>
+                <p>Use on any device, anywhere, anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Try It Section -->
+    <section id="try-it" class="try-it">
+        <h2>Identify Any Flower</h2>
+        <div class="upload-container">
+            <form id="upload-form">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your image or click to browse</p>
+                    <input type="file" id="image-input" accept=".jpg,.jpeg,.png" hidden required>
+                </div>
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-search"></i> Analyze Image
+                </button>
+            </form>
+        </div>
+
+        <div id="result-section" class="result-section" style="display: none;">
+            <h3>Results</h3>
+            <div class="result-content">
+                <div class="result-image">
+                    <img id="uploaded-image" src="" alt="Uploaded flower">
+                </div>
+                <div class="result-details">
+                    <div class="prediction-box">
+                        <h4>Identified Flower:</h4>
+                        <p id="prediction-class"></p>
+                        <div class="confidence-bar">
+                            <div class="confidence-level" id="confidence-level"></div>
+                        </div>
+                        <p class="confidence-text">Confidence: <span id="prediction-confidence"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How accurate is the flower recognition?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Our AI model achieves high accuracy in flower recognition, trained on thousands of images and continuously improved.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What image formats are supported?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We support JPEG, JPG, and PNG image formats. For best results, use clear, well-lit images.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is this service free to use?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, BloomAI is completely free to use for all users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BloomAI</h3>
+                <p>Empowering botanical discovery through artificial intelligence</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#try-it">Try It</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BloomAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

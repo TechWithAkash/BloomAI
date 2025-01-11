@@ -1,5 +1,7 @@
 tensorflow
 numpy
+Flask  
+pillow
 pandas
 scikit-learn
-streamlit
+matplotlib

@@ -1,0 +1,44 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="400" cy="300" r="250" fill="#e8f4ea" />
+    
+    <!-- Flower 1 -->
+    <g transform="translate(400,300) rotate(0)">
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#FF69B4" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#FF69B4" transform="rotate(72)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#FF69B4" transform="rotate(144)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#FF69B4" transform="rotate(216)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#FF69B4" transform="rotate(288)" />
+        <circle cx="0" cy="0" r="20" fill="#FFD700" />
+    </g>
+    
+    <!-- Flower 2 -->
+    <g transform="translate(250,200) scale(0.7)">
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#4CAF50" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#4CAF50" transform="rotate(72)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#4CAF50" transform="rotate(144)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#4CAF50" transform="rotate(216)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#4CAF50" transform="rotate(288)" />
+        <circle cx="0" cy="0" r="20" fill="#FFA500" />
+    </g>
+    
+    <!-- Flower 3 -->
+    <g transform="translate(550,400) scale(0.8)">
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#9C27B0" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#9C27B0" transform="rotate(72)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#9C27B0" transform="rotate(144)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#9C27B0" transform="rotate(216)" />
+        <path d="M0,-80 C30,-80 30,-20 0,-20 C-30,-20 -30,-80 0,-80" fill="#9C27B0" transform="rotate(288)" />
+        <circle cx="0" cy="0" r="20" fill="#FFD700" />
+    </g>
+    
+    <!-- Decorative leaves -->
+    <path d="M200,450 Q300,350 200,250" stroke="#4CAF50" fill="none" stroke-width="8" />
+    <path d="M600,450 Q500,350 600,250" stroke="#4CAF50" fill="none" stroke-width="8" />
+    
+    <!-- Small decorative circles -->
+    <circle cx="150" cy="150" r="10" fill="#FF69B4" opacity="0.5" />
+    <circle cx="650" cy="150" r="15" fill="#4CAF50" opacity="0.5" />
+    <circle cx="200" cy="500" r="12" fill="#9C27B0" opacity="0.5" />
+    <circle cx="600" cy="500" r="8" fill="#FF69B4" opacity="0.5" />
+</svg>
