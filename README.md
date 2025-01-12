@@ -7,10 +7,12 @@
 
 BloomAI is a state-of-the-art flower recognition system that leverages deep learning to identify various flower species with high accuracy. Built using TensorFlow and Flask, this application provides an intuitive web interface for instant flower identification.
 
-[View Demo](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN) | [Report Bug](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN/issues) | [Request Feature](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN/issues)
+# Demo Video
 
-![BloomAI Demo](https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792
-)
+<video width="640" height="360" controls>
+  <source src="https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## 🌟 Features
 
