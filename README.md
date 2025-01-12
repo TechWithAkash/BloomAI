@@ -9,10 +9,10 @@ BloomAI is a state-of-the-art flower recognition system that leverages deep lear
 
 # Demo Video
 
-<video width="640" height="360" controls>
-  <source src="https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![BloomAI Demo](https://your-thumbnail-image-link.com)
+
+[Click here to watch the demo video](https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792)
+
 
 ## 🌟 Features
 
