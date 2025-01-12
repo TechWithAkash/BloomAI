@@ -9,7 +9,8 @@ BloomAI is a state-of-the-art flower recognition system that leverages deep lear
 
 [View Demo](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN) | [Report Bug](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN/issues) | [Request Feature](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN/issues)
 
-![BloomAI Demo](screenshots/demo.gif)
+![BloomAI Demo](https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792
+)
 
 ## 🌟 Features
 
