@@ -5,14 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BloomAI - Intelligent Flower Recognition</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
     <!-- Navigation -->
@@ -89,52 +86,56 @@
     <!-- Try It Section -->
     <section id="try-it" class="try-it">
       <h2 class="ai">Instant Flower Classification</h2>
-
-      <p>
-        Upload your flower image and get accurate identification within seconds
-      </p>
+      <p class="subtitle">Upload your flower image and discover its identity using advanced AI technology</p>
+      
       <div class="upload-container">
-        <form id="upload-form">
-          <div class="upload-area" id="uploadArea">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your image or click to browse</p>
-            <input
-              type="file"
-              id="image-input"
-              accept=".jpg,.jpeg,.png"
-              hidden
-              required
-            />
-          </div>
-          <button type="submit" class="submit-button">
-            <i class="fas fa-search"></i> Analyze Image
-          </button>
-        </form>
+          <form id="upload-form">
+              <div class="upload-area" id="uploadArea">
+                  <div class="upload-icon">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                  </div>
+                  <p>Drag & drop your image or click to browse</p>
+                  <input type="file" name="file" id="image-input" accept=".jpg,.jpeg,.png" hidden required>
+                              </div>
+              
+              <div class="preview-container" id="preview-container">
+                  <img id="image-preview" src="" alt="Preview" />
+              </div>
+              
+              <button type="submit" class="submit-button" id="analyze-button">
+                  <i class="fas fa-magic"></i> Classify Image
+              </button>
+          </form>
+      </div>
+
+      <div class="loading" id="loading">
+          <div class="loading-spinner"></div>
+          <p>Analyzing your image...</p>
       </div>
 
       <div id="result-section" class="result-section" style="display: none">
-        <h3>Results</h3>
-        <div class="result-content">
-          <div class="result-image">
-            <img id="uploaded-image" src="" alt="Uploaded flower" />
-          </div>
-          <div class="result-details">
-            <div class="prediction-box">
-              <h4>Identified Flower:</h4>
-              <p id="prediction-class"></p>
-              <div class="confidence-bar">
-                <div class="confidence-level" id="confidence-level"></div>
+          <div class="result-header">Analysis Results</div>
+          <div class="result-content">
+              <div class="result-image">
+                  <img id="uploaded-image" src="" alt="Analyzed flower" />
               </div>
-              <p class="confidence-text">
-                Confidence: <span id="prediction-confidence"></span>
-              </p>
-            </div>
+              <div class="result-details">
+                  <div class="prediction-box">
+                      <h4>Identified Flower</h4>
+                      <p id="prediction-class" style="font-size: 1.5rem; font-weight: 600; color: var(--primary-color);"></p>
+                      <div class="confidence-bar">
+                          <div class="confidence-level" id="confidence-level"></div>
+                      </div>
+                      <p class="confidence-text">
+                          Confidence: <span id="prediction-confidence"></span>
+                      </p>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
 
-      <div id="error-message" class="error-message" style="display: none"></div>
-    </section>
+      <div id="error-message" class="error-message"></div>
+  </section>
 
     <!-- FAQ Section -->
     <section id="faq" class="faq">
