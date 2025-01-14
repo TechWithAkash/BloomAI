@@ -5,3 +5,4 @@ pillow
 pandas
 scikit-learn
 matplotlib
+Werkzeug==2.2.2
