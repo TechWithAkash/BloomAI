@@ -153,6 +153,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const loading = document.getElementById('loading');
     const errorMessage = document.getElementById('error-message');
 
+        // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            faqItem.classList.toggle('active');
+            question.querySelector('.toggle-icon').textContent = 
+                faqItem.classList.contains('active') ? '-' : '+';
+        });
+    });
+
     uploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         // uploadArea.style.borderColor = var('--primary-color');
