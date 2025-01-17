@@ -30,8 +30,8 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: var(--white);
-    box-shadow: var(--shadow);
+    /* background-color: var(--white); */
+    /* box-shadow: var(--shadow); */
     z-index: 1000;
 }
 
@@ -421,7 +421,7 @@ body {
 }
 
 .footer-section h3 {
-    color: var(--white);
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
