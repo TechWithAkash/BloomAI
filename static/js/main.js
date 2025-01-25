@@ -227,8 +227,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData
             });
+            console.log("Model response====>>>>>>>>>>>>",response); // Check the response object
+
 
             const data = await response.json();
+            console.log("Model data====>>>>>>>>>>>>",data); // Check the data object
 
             if (response.ok) {
                 document.getElementById('uploaded-image').src = imagePreview.src;
