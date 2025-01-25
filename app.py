@@ -9,7 +9,9 @@ import json
 app = Flask(__name__)
 
 # Load the trained model
-MODEL_PATH = r'D:\DeepLearning Projects\Plant_Detection_Using_CNN\models\final_model.keras'
+# MODEL_PATH = r'D:\DeepLearning Projects\Plant_Detection_Using_CNN\models\final_model.keras'
+# model = tf.keras.models.load_model(MODEL_PATH)
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models/final_model.keras')
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # Configure upload folder
