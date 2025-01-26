@@ -142,6 +142,7 @@
 //     }
 // });
 
+// static/js/main.js
 document.addEventListener('DOMContentLoaded', function() {
     const uploadArea = document.getElementById('uploadArea');
     const imageInput = document.getElementById('image-input');
@@ -222,26 +223,54 @@ document.addEventListener('DOMContentLoaded', function() {
         resultSection.style.display = 'none';
         errorMessage.style.display = 'none';
 
+        // try {
+        //     const response = await fetch('/predict', {
+        //         method: 'POST',
+        //         body: formData
+        //     });
+
+            
+
+        //     const data = await response.json();
+
+        //     if (response.ok) {
+        //         document.getElementById('uploaded-image').src = imagePreview.src;
+        //         document.getElementById('prediction-class').textContent = data.class;
+        //         document.getElementById('confidence-level').style.width = data.confidence;
+        //         document.getElementById('prediction-confidence').textContent = data.confidence;
+        //         resultSection.style.display = 'block';
+        //     } else {
+        //         throw new Error(data.error || 'Failed to analyze image');
+        //     }
+        // } catch (error) {
+        //     errorMessage.textContent = error.message;
+        //     errorMessage.style.display = 'block';
+        // } finally {
+        //     analyzeButton.disabled = false;
+        //     loading.style.display = 'none';
+        // }
+
         try {
             const response = await fetch('/predict', {
                 method: 'POST',
                 body: formData
             });
-            console.log("Model response====>>>>>>>>>>>>",response); // Check the response object
-
-
-            const data = await response.json();
-            console.log("Model data====>>>>>>>>>>>>",data); // Check the data object
-
-            if (response.ok) {
-                document.getElementById('uploaded-image').src = imagePreview.src;
-                document.getElementById('prediction-class').textContent = data.class;
-                document.getElementById('confidence-level').style.width = data.confidence;
-                document.getElementById('prediction-confidence').textContent = data.confidence;
-                resultSection.style.display = 'block';
-            } else {
-                throw new Error(data.error || 'Failed to analyze image');
+            console.log("Response data is --->>>>",response)
+        
+            // Add this check to ensure response is valid before parsing
+            if (!response.ok) {
+                const errorText = await response.text(); // Get error text instead of trying to parse JSON
+                throw new Error(errorText || 'Failed to analyze image');
             }
+        
+            const data = await response.json();
+            console.log("Data is --->>>>",data)
+        
+            document.getElementById('uploaded-image').src = imagePreview.src;
+            document.getElementById('prediction-class').textContent = data.class;
+            document.getElementById('confidence-level').style.width = data.confidence;
+            document.getElementById('prediction-confidence').textContent = data.confidence;
+            resultSection.style.display = 'block';
         } catch (error) {
             errorMessage.textContent = error.message;
             errorMessage.style.display = 'block';
