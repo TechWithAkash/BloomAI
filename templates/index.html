@@ -1,4 +1,3 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   </head>
   <body>
     <!-- Navigation -->
@@ -17,7 +17,6 @@
       <div class="nav-container">
         <div class="logo">
           <i class="fas fa-flower"></i>
-
           <span>🌼BloomAI</span>
         </div>
         <div class="nav-toggle" id="navToggle">
@@ -30,7 +29,14 @@
           <li><a href="#features">Features</a></li>
           <li><a href="#try-it">Try It</a></li>
           <li><a href="#faq">FAQ</a></li>
-         
+          {% if 'user_id' in session %}
+            <li class="user-icon">
+              <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon">
+              <a href="{{ url_for('logout') }}">Logout</a>
+            </li>
+          {% else %}
+            <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -38,16 +44,12 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-content">
-        <h1>Discover the World of
-            </h1><span>Flowers with AI</span>
-        <p>Instantly identify over 102 flower species with our advanced AI technology. Upload a photo and unlock the secrets of nature's most beautiful creations</p>
+        <h1>Discover the World of <span>Flowers with AI</span></h1>
+        <p>Instantly identify over 102 flower species with our advanced AI technology. Upload a photo and unlock the secrets of nature's most beautiful creations.</p>
         <a href="#try-it" class="cta-button">Get Started</a>
       </div>
       <div class="hero-image">
-        <img
-          src="{{ url_for('static', filename='images/file.png') }}"
-          alt="Flowers illustration"
-        />
+        <img src="{{ url_for('static', filename='images/file.png') }}" alt="Flowers illustration" />
       </div>
     </section>
 
@@ -58,27 +60,22 @@
         <div class="feature-card">
           <i class="fas fa-brain"></i>
           <h3>Advanced AI Technology</h3>
-          <p>
-            Powered by state-of-the-art deep learning models for accurate
-            recognition
-          </p>
+          <p>Powered by state-of-the-art deep learning models for accurate recognition.</p>
         </div>
         <div class="feature-card">
           <i class="fas fa-bolt"></i>
           <h3>Instant Results</h3>
-          <p>Get flower identification results in seconds</p>
+          <p>Get flower identification results in seconds.</p>
         </div>
         <div class="feature-card">
           <i class="fas fa-database"></i>
           <h3>Extensive Database</h3>
-          <p>
-            Comprehensive collection of flower species from around the world
-          </p>
+          <p>Comprehensive collection of flower species from around the world.</p>
         </div>
         <div class="feature-card">
           <i class="fas fa-mobile-alt"></i>
           <h3>Mobile Friendly</h3>
-          <p>Use on any device, anywhere, anytime</p>
+          <p>Use on any device, anywhere, anytime.</p>
         </div>
       </div>
     </section>
@@ -86,56 +83,56 @@
     <!-- Try It Section -->
     <section id="try-it" class="try-it">
       <h2 class="ai">Instant Flower Classification</h2>
-      <p class="subtitle">Upload your flower image and discover its identity using advanced AI technology</p>
+      <p class="subtitle">Upload your flower image and discover its identity using advanced AI technology.</p>
       
       <div class="upload-container">
-          <form id="upload-form">
-              <div class="upload-area" id="uploadArea">
-                  <div class="upload-icon">
-                      <i class="fas fa-cloud-upload-alt"></i>
-                  </div>
-                  <p>Drag & drop your image or click to browse</p>
-                  <input type="file" name="file" id="image-input" accept=".jpg,.jpeg,.png" hidden required>
-                              </div>
-              
-              <div class="preview-container" id="preview-container">
-                  <img id="image-preview" src="" alt="Preview" />
-              </div>
-              
-              <button type="submit" class="submit-button" id="analyze-button">
-                  <i class="fas fa-magic"></i> Classify Flower
-              </button>
-          </form>
+        <form id="upload-form" action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <p>Drag & drop your image or click to browse</p>
+            <input type="file" name="file" id="image-input" accept=".jpg,.jpeg,.png" hidden required>
+          </div>
+          
+          <div class="preview-container" id="preview-container">
+            <img id="image-preview" src="" alt="Preview" />
+          </div>
+          
+          <button type="submit" class="submit-button" id="analyze-button">
+            <i class="fas fa-magic"></i> Classify Flower
+          </button>
+        </form>
       </div>
 
       <div class="loading" id="loading">
-          <div class="loading-spinner"></div>
-          <p>Analyzing your image...</p>
+        <div class="loading-spinner"></div>
+        <p>Analyzing your image...</p>
       </div>
 
       <div id="result-section" class="result-section" style="display: none">
-          <div class="result-header">Analysis Results</div>
-          <div class="result-content">
-              <div class="result-image">
-                  <img id="uploaded-image" src="" alt="Analyzed flower" />
-              </div>
-              <div class="result-details">
-                  <div class="prediction-box">
-                      <h4>Identified Flower</h4>
-                      <p id="prediction-class" style="font-size: 1.5rem; font-weight: 600; color: var(--primary-color);"></p>
-                      <div class="confidence-bar">
-                          <div class="confidence-level" id="confidence-level"></div>
-                      </div>
-                      <p class="confidence-text">
-                          Confidence: <span id="prediction-confidence"></span>
-                      </p>
-                  </div>
-              </div>
+        <div class="result-header">Analysis Results</div>
+        <div class="result-content">
+          <div class="result-image">
+            <img id="uploaded-image" src="" alt="Analyzed flower" />
           </div>
+          <div class="result-details">
+            <div class="prediction-box">
+              <h4>Identified Flower</h4>
+              <p id="prediction-class" style="font-size: 1.5rem; font-weight: 600; color: var(--primary-color);"></p>
+              <div class="confidence-bar">
+                <div class="confidence-level" id="confidence-level"></div>
+              </div>
+              <p class="confidence-text">
+                Confidence: <span id="prediction-confidence"></span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="error-message" class="error-message"></div>
-  </section>
+    </section>
 
     <!-- FAQ Section -->
     <section id="faq" class="faq">
@@ -147,10 +144,7 @@
             <span class="toggle-icon">+</span>
           </div>
           <div class="faq-answer">
-            <p>
-              Our AI model achieves high accuracy in flower recognition, trained
-              on thousands of images and continuously improved.
-            </p>
+            <p>Our AI model achieves high accuracy in flower recognition, trained on thousands of images and continuously improved.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -159,10 +153,7 @@
             <span class="toggle-icon">+</span>
           </div>
           <div class="faq-answer">
-            <p>
-              We support JPEG, JPG, and PNG image formats. For best results, use
-              clear, well-lit images.
-            </p>
+            <p>We support JPEG, JPG, and PNG image formats. For best results, use clear, well-lit images.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -176,15 +167,11 @@
         </div>
         <div class="faq-item">
           <div class="faq-question">
-            <h3>How many Flowers Species Can BloomAI identify?</h3>
+            <h3>How many flower species can BloomAI identify?</h3>
             <span class="toggle-icon">+</span>
           </div>
           <div class="faq-answer">
-            <p>
-              Currently, BloomAI can identify 102 different flower species with
-              high accuracy. Our database is continuously expanding with regular
-              updates.
-            </p>
+            <p>Currently, BloomAI can identify 102 different flower species with high accuracy. Our database is continuously expanding with regular updates.</p>
           </div>
         </div>
       </div>
@@ -195,9 +182,7 @@
       <div class="footer-content">
         <div class="footer-section">
           <h3>BloomAI</h3>
-          <p>
-            Revolutionizing flower identification with artificial intelligence.
-          </p>
+          <p>Revolutionizing flower identification with artificial intelligence.</p>
         </div>
         <div class="footer-section">
           <h3>Quick Links</h3>
@@ -223,6 +208,19 @@
       </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              toastr["{{ category }}"]("{{ message }}");
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      });
+    </script>
   </body>
 </html>

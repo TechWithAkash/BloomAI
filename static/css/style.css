@@ -21,7 +21,6 @@ html {
 }
 
 body {
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     color: var(--text-color);
 }
 
@@ -30,8 +29,8 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    /* background-color: var(--white); */
-    /* box-shadow: var(--shadow); */
+    background-color: var(--white);
+    box-shadow: var(--shadow);
     z-index: 1000;
 }
 
@@ -74,6 +73,29 @@ body {
     display: none;
 }
 
+.user-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-icon img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.user-icon a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.user-icon a:hover {
+    color: var(--primary-color);
+}
+
 /* Hero Section */
 .hero {
     padding: 160px;
@@ -90,17 +112,19 @@ body {
     max-width: 600px;
     z-index: 1;
 }
+
 .hero h1 {
     font-size: 3rem;
     font-weight: bold;
-    /* margin-bottom: 1rem; */
     color: var(--text-color);
 }
-.hero span{
+
+.hero span {
     color: var(--primary-color);
     font-size: 3rem;
     font-weight: bold;
 }
+
 .hero-image {
     flex: 1;
     max-width: 800px;
@@ -117,12 +141,10 @@ body {
     object-fit: contain;
 }
 
-
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
-
 
 .cta-button {
     display: inline-block;
@@ -178,7 +200,7 @@ body {
     margin-bottom: 1rem;
 }
 
-
+/* Try It Section */
 .try-it {
     max-width: 900px;
     margin: 40px auto;
@@ -364,6 +386,7 @@ body {
     padding: 4rem 2rem;
     background-color: var(--white);
 }
+
 .faq h2 {
     display: flex;
     justify-content: center;
@@ -409,8 +432,6 @@ body {
     padding: 4rem 2rem 1rem;
 }
 
-/* Continuing footer and adding responsive styles */
-
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -421,7 +442,7 @@ body {
 }
 
 .footer-section h3 {
-   color: var(--primary-color);
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
@@ -582,6 +603,7 @@ body {
     .social-links {
         justify-content: center;
     }
+
     .hero-image {
         max-width: 300px;
     }
