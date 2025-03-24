@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Visualization - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container visualization-section">
+        <h1 class="page-title">AI Decision Visualization</h1>
+        
+        <div class="visualization-container">
+            <div class="vis-original">
+                <h3>Original Image</h3>
+                <img src="{{ image_url }}" alt="{{ identification.flower_class }}">
+            </div>
+            
+            <div class="vis-heatmap">
+                <h3>AI Focus Areas</h3>
+                {% if heatmap and heatmap != "placeholder" %}
+                    <img src="data:image/jpeg;base64,{{ heatmap }}" alt="Heatmap visualization">
+                {% else %}
+                    <div class="heatmap-placeholder">
+                        <p>Heatmap visualization not available for this image</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="top-predictions">
+            <h3>Top Predictions</h3>
+            <div class="predictions-list">
+                {% for class_name, confidence in top_predictions %}
+                <div class="prediction-item">
+                    <div class="prediction-name">{{ class_name }}</div>
+                    <div class="prediction-bar-container">
+                        <div class="prediction-bar" style="width: {{ confidence * 100 }}%;"></div>
+                        <span class="prediction-percentage">{{ "%.2f"|format(confidence * 100) }}%</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="visualization-actions">
+            <a href="{{ url_for('history') }}" class="action-btn">
+                <i class="fas fa-arrow-left"></i> Back to History
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

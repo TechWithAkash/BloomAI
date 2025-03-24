@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore Flowers - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container explore-section">
+        <h1 class="page-title">Explore the World of Flowers</h1>
+        
+        <div class="filters-container">
+            <form action="{{ url_for('explore') }}" method="GET" class="filters-form">
+                <div class="filter-group">
+                    <label for="color">Color</label>
+                    <select name="color" id="color">
+                        <option value="">All Colors</option>
+                        {% for color in colors %}
+                            <option value="{{ color[0] }}" {% if selected_color == color[0] %}selected{% endif %}>{{ color[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="season">Season</label>
+                    <select name="season" id="season">
+                        <option value="">All Seasons</option>
+                        {% for season in seasons %}
+                            <option value="{{ season[0] }}" {% if selected_season == season[0] %}selected{% endif %}>{{ season[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="region">Region</label>
+                    <select name="region" id="region">
+                        <option value="">All Regions</option>
+                        {% for region in regions %}
+                            <option value="{{ region[0] }}" {% if selected_region == region[0] %}selected{% endif %}>{{ region[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <button type="submit" class="filter-btn">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+                
+                <a href="{{ url_for('explore') }}" class="clear-btn">
+                    <i class="fas fa-times"></i> Clear
+                </a>
+            </form>
+        </div>
+        
+        {% if flowers %}
+            <div class="explore-grid">
+                {% for flower in flowers %}
+                <div class="explore-card">
+                    <div class="explore-image">
+                        <!-- Placeholder image if no specific image available -->
+                        <img src="{{ url_for('static', filename='images/flowers/' + flower.name + '.jpg') }}" 
+                             alt="{{ flower.name }}" 
+                             onerror="this.src='{{ url_for('static', filename='images/flower-placeholder.jpg') }}'">
+                    </div>
+                    <div class="explore-details">
+                        <h3>{{ flower.name }}</h3>
+                        
+                        <div class="flower-tags">
+                            {% if flower.color %}
+                                {% for color in flower.color.split(',') %}
+                                <span class="tag color-tag">{{ color.strip() }}</span>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            {% if flower.flowering_season %}
+                                {% for season in flower.flowering_season.split(',') %}
+                                <span class="tag season-tag">{{ season.strip() }}</span>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            {% if flower.region %}
+                                <span class="tag region-tag">{{ flower.region }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if flower.description %}
+                        <p class="explore-description">{{ flower.description[:150] }}{% if flower.description|length > 150 %}...{% endif %}</p>
+                        {% endif %}
+                        
+                        <a href="{{ url_for('learn_category', category=flower.name) }}" class="learn-more-link">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-search empty-icon"></i>
+                <h3>No Flowers Found</h3>
+                <p>No flowers match your current filters. Try different criteria or clear filters.</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

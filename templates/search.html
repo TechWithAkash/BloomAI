@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container search-results-section">
+        <div class="search-header">
+            <h1 class="page-title">Search Results</h1>
+            <div class="search-container">
+                <form action="{{ url_for('search') }}" method="GET">
+                    <input type="text" name="q" value="{{ query }}" placeholder="Search for flower information..." class="search-input">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        {% if results %}
+            <div class="results-count">
+                <p>Found {{ results|length }} results for "{{ query }}"</p>
+            </div>
+            
+            <div class="search-results-grid">
+                {% for flower in results %}
+                <div class="result-card">
+                    <div class="result-image">
+                        <!-- Placeholder image if no specific image available -->
+                        <img src="{{ url_for('static', filename='images/flowers/' + flower.name + '.jpg') }}" 
+                             alt="{{ flower.name }}" 
+                             onerror="this.src='{{ url_for('static', filename='images/flower-placeholder.jpg') }}'">
+                    </div>
+                    <div class="result-details">
+                        <h3>{{ flower.name }}</h3>
+                        
+                        {% if flower.description %}
+                        <p class="result-description">
+                            {{ flower.description[:150] }}{% if flower.description|length > 150 %}...{% endif %}
+                        </p>
+                        {% endif %}
+                        
+                        <div class="result-attributes">
+                            {% if flower.color %}
+                            <div class="attribute">
+                                <span class="attr-label">Colors:</span>
+                                <span class="attr-value">{{ flower.color }}</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if flower.flowering_season %}
+                            <div class="attribute">
+                                <span class="attr-label">Season:</span>
+                                <span class="attr-value">{{ flower.flowering_season }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <a href="{{ url_for('learn_category', category=flower.name) }}" class="learn-more-link">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% elif query %}
+            <div class="empty-state">
+                <i class="fas fa-search empty-icon"></i>
+                <h3>No Results Found</h3>
+                <p>No flowers match your search for "{{ query }}". Try different keywords.</p>
+                <a href="{{ url_for('learn') }}" class="cta-button">Browse Categories</a>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-search empty-icon"></i>
+                <h3>Enter a Search Term</h3>
+                <p>Type a keyword to search for flowers.</p>
+                <a href="{{ url_for('learn') }}" class="cta-button">Browse Categories</a>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

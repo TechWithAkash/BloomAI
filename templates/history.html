@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Identification History - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    {% include 'nav.html' %}
+
+    <section class="container history-section">
+        <h1 class="page-title">Your Identification History</h1>
+        
+        {% if identifications %}
+            <div class="history-grid">
+                {% for identification in identifications %}
+                <div class="history-card">
+                    <div class="history-image">
+                        <img src="{{ identification.image_path }}" alt="{{ identification.flower_class }}">
+                    </div>
+                    <div class="history-details">
+                        <h3>{{ identification.flower_class }}</h3>
+                        <p>Confidence: {{ "%.2f"|format(identification.confidence * 100) }}%</p>
+                        <p>Identified on: {{ identification.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <div class="history-actions">
+                            <a href="{{ url_for('visualization', id=identification.id) }}" class="action-btn">
+                                <i class="fas fa-chart-pie"></i> View Analysis
+                            </a>
+                            <button class="favorite-btn" data-flower="{{ identification.flower_class }}">
+                                <i class="far fa-heart"></i> Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-history empty-icon"></i>
+                <h3>No Identifications Yet</h3>
+                <p>Once you identify flowers, they will appear here.</p>
+                <a href="{{ url_for('home') }}#try-it" class="cta-button">Try It Now</a>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Add favorite functionality
+        $(document).ready(function() {
+            $('.favorite-btn').click(function() {
+                const flowerClass = $(this).data('flower');
+                const btn = $(this);
+                
+                $.ajax({
+                    url: "{{ url_for('add_favorite') }}",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ flower_class: flowerClass }),
+                    success: function(response) {
+                        toastr.success(response.message);
+                        btn.html('<i class="fas fa-heart"></i> Favorited');
+                        btn.addClass('favorited');
+                    },
+                    error: function(error) {
+                        toastr.error("Error adding to favorites");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Badges - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container badges-section">
+        <h1 class="page-title">Your Achievement Badges</h1>
+        
+        <div class="badges-container">
+            <div class="earned-badges">
+                <h2>Earned Badges</h2>
+                {% if earned_badges %}
+                    <div class="badges-grid">
+                        {% for badge in earned_badges %}
+                        <div class="badge-card earned">
+                            <div class="badge-icon">
+                                <img src="{{ badge.image_path }}" alt="{{ badge.name }}">
+                            </div>
+                            <h3>{{ badge.name }}</h3>
+                            <p>{{ badge.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-badges">
+                        <p>You haven't earned any badges yet. Start identifying flowers to earn your first badge!</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="unearned-badges">
+                <h2>Badges to Earn</h2>
+                {% if unearned_badges %}
+                    <div class="badges-grid">
+                        {% for badge in unearned_badges %}
+                        <div class="badge-card unearned">
+                            <div class="badge-icon locked">
+                                <img src="{{ badge.image_path }}" alt="{{ badge.name }}">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                            <h3>{{ badge.name }}</h3>
+                            <p>{{ badge.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="all-earned">
+                        <p>Congratulations! You've earned all available badges.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

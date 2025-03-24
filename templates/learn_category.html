@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ category }} - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container category-section">
+        <div class="category-header">
+            <a href="{{ url_for('learn') }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Categories
+            </a>
+            <h1 class="page-title">{{ category }}</h1>
+        </div>
+        
+        {% if flowers %}
+            <div class="flowers-grid">
+                {% for flower in flowers %}
+                <div class="flower-card">
+                    <div class="flower-image">
+                        <!-- Placeholder image if no specific image available -->
+                        <img src="{{ url_for('static', filename='images/flowers/' + flower.name + '.jpg') }}" 
+                             alt="{{ flower.name }}" 
+                             onerror="this.src='{{ url_for('static', filename='images/flower-placeholder.jpg') }}'">
+                    </div>
+                    <div class="flower-details">
+                        <h3>{{ flower.name }}</h3>
+                        
+                        <div class="flower-attributes">
+                            {% if flower.color %}
+                            <div class="attribute">
+                                <span class="attr-label">Colors:</span>
+                                <span class="attr-value">{{ flower.color }}</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if flower.flowering_season %}
+                            <div class="attribute">
+                                <span class="attr-label">Season:</span>
+                                <span class="attr-value">{{ flower.flowering_season }}</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if flower.region %}
+                            <div class="attribute">
+                                <span class="attr-label">Region:</span>
+                                <span class="attr-value">{{ flower.region }}</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if flower.habitat %}
+                            <div class="attribute">
+                                <span class="attr-label">Habitat:</span>
+                                <span class="attr-value">{{ flower.habitat }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        {% if flower.description %}
+                        <div class="flower-description">
+                            <p>{{ flower.description }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-seedling empty-icon"></i>
+                <h3>No Information Available</h3>
+                <p>We don't have any information about {{ category }} yet. Check back soon!</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

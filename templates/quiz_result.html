@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Results - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container quiz-results-section">
+        <h1 class="page-title">Quiz Results</h1>
+        
+        <div class="results-card">
+            <h2>{{ quiz.title }}</h2>
+            
+            <div class="score-circle {% if percentage >= 80 %}excellent{% elif percentage >= 60 %}good{% elif percentage >= 40 %}average{% else %}needs-improvement{% endif %}">
+                <div class="score-text">
+                    <span class="score-percentage">{{ "%.0f"|format(percentage) }}%</span>
+                    <span class="score-fraction">{{ score }}/{{ total }}</span>
+                </div>
+            </div>
+            
+            <div class="result-message">
+                {% if percentage >= 80 %}
+                    <h3>Excellent!</h3>
+                    <p>You have excellent knowledge of flowers!</p>
+                {% elif percentage >= 60 %}
+                    <h3>Good Job!</h3>
+                    <p>You have good knowledge of flowers!</p>
+                {% elif percentage >= 40 %}
+                    <h3>Not Bad!</h3>
+                    <p>You have some knowledge of flowers, but there's room to learn more.</p>
+                {% else %}
+                    <h3>Keep Learning!</h3>
+                    <p>You still have much to learn about flowers.</p>
+                {% endif %}
+            </div>
+            
+            <div class="result-actions">
+                <a href="{{ url_for('take_quiz', id=quiz.id) }}" class="retry-btn">
+                    <i class="fas fa-redo"></i> Try Again
+                </a>
+                <a href="{{ url_for('quizzes') }}" class="back-btn">
+                    <i class="fas fa-th-list"></i> All Quizzes
+                </a>
+                <a href="{{ url_for('learn') }}" class="learn-btn">
+                    <i class="fas fa-book"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

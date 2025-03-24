@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn About Flowers - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container learn-section">
+        <h1 class="page-title">Learn About Flowers</h1>
+        
+        <div class="search-container">
+            <form action="{{ url_for('search') }}" method="GET">
+                <input type="text" name="q" placeholder="Search for flower information..." class="search-input">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        
+        <div class="categories-grid">
+            {% for category in categories %}
+            <a href="{{ url_for('learn_category', category=category) }}" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-flower"></i>
+                </div>
+                <h3>{{ category }}</h3>
+                <span class="learn-more">Learn More <i class="fas fa-arrow-right"></i></span>
+            </a>
+            {% endfor %}
+        </div>
+        
+        <div class="learning-tips">
+            <h2>Tips for Identifying Flowers</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Take Clear Photos</h3>
+                    <p>Make sure your flower is well-lit and the image is not blurry.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-crop"></i>
+                    <h3>Focus on the Flower</h3>
+                    <p>Center the flower in your image and try to include the whole bloom.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-sun"></i>
+                    <h3>Natural Light</h3>
+                    <p>Take photos in natural daylight for the best results.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Include Features</h3>
+                    <p>If possible, include leaves, stems, and other distinctive features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

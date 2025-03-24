@@ -13,11 +13,11 @@
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
+    <nav className=" bg-red-400 text-red-600">
+      <div class="nav-container"> 
         <div class="logo">
           <i class="fas fa-flower"></i>
-          <span>🌼BloomAI</span>
+          <p className="text-red-600">🌼BloomAI</p>
         </div>
         <div class="nav-toggle" id="navToggle">
           <span></span>
@@ -30,10 +30,18 @@
           <li><a href="#try-it">Try It</a></li>
           <li><a href="#faq">FAQ</a></li>
           {% if 'user_id' in session %}
-            <li class="user-icon">
-              <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon">
-              <a href="{{ url_for('logout') }}">Logout</a>
-            </li>
+          <li><a href="{{ url_for('history') }}">History</a></li>
+          <li><a href="{{ url_for('favorites') }}">Favorites</a></li>
+           <!--
+           <li><a href="{{ url_for('badges') }}">Badges</a></li>
+          <li><a href="{{ url_for('quizzes') }}">Quizzes</a></li>
+          <li><a href="{{ url_for('learn') }}">Learn</a></li>
+          <li><a href="{{ url_for('explore') }}">Explore</a></li>
+         -->
+          <li class="user-icon">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon">
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </li>
           {% else %}
             <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
           {% endif %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flower Quizzes - BloomAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'nav.html' %}
+
+    <section class="container quizzes-section">
+        <h1 class="page-title">Test Your Flower Knowledge</h1>
+        
+        {% if quizzes %}
+            <div class="quizzes-grid">
+                {% for quiz in quizzes %}
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <h3>{{ quiz.title }}</h3>
+                        <span class="difficulty {{ quiz.difficulty }}">{{ quiz.difficulty }}</span>
+                    </div>
+                    <p>{{ quiz.description }}</p>
+                    <div class="quiz-stats">
+                        <span><i class="fas fa-question-circle"></i> {{ quiz.questions|length }} questions</span>
+                        
+                        {% set completed = False %}
+                        {% set score = 0 %}
+                        {% set total = 0 %}
+                        
+                        {% for result in completed_quizzes %}
+                            {% if result.quiz_id == quiz.id %}
+                                {% set completed = True %}
+                                {% set score = result.score %}
+                                {% set total = result.total_questions %}
+                                {% break %}
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if completed %}
+                            <span class="score">Score: {{ score }}/{{ total }}</span>
+                            <a href="{{ url_for('take_quiz', id=quiz.id) }}" class="take-quiz-btn">Retry Quiz</a>
+                        {% else %}
+                            <a href="{{ url_for('take_quiz', id=quiz.id) }}" class="take-quiz-btn">Take Quiz</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-scroll empty-icon"></i>
+                <h3>No Quizzes Available</h3>
+                <p>Check back soon for new quizzes on flower identification!</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
