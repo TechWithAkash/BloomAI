@@ -1778,7 +1778,8 @@
       height: 0;
       overflow: hidden;
       transition: height 0.3s ease;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
     }
   
     .nav-links.active {
