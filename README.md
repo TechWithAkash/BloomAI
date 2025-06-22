@@ -1,141 +1,164 @@
-# BloomAI 🌸 - Intelligent Flower Recognition System
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/downloads/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.0%2B-orange)](https://www.tensorflow.org/)
-[![Flask](https://img.shields.io/badge/Flask-2.0%2B-lightgrey)](https://flask.palletsprojects.com/)
+<h1 align="center">🔥 Algerian Forest Fire Prediction App</h1>
 
-BloomAI is a state-of-the-art flower recognition system that leverages deep learning to identify various flower species with high accuracy. Built using TensorFlow and Flask, this application provides an intuitive web interface for instant flower identification.
+<p align="center">
+  A clean, interactive, and production-ready Machine Learning web app that predicts Fire Weather Index (FWI) using real Algerian forest climate data.
+</p>
 
-# Demo Video
+<p align="center">
+  <a href="https://forest-fire-prediction-wvfl.onrender.com/" target="_blank">
+    🟢 View Live App
+  </a>
+</p>
 
-[Click here to watch the demo video](https://github.com/user-attachments/assets/25938f65-40e6-4d32-b95b-b8a901aec792)
+---
 
+## 🎥 Demo Video
 
-## 🌟 Features
+https://github.com/user-attachments/assets/2f51972c-08dd-4015-87e2-22ae1136e708
 
-- **Real-time Flower Recognition**: Instantly identify flower species from uploaded images
-- **Modern UI/UX**: Clean, responsive interface with drag-and-drop functionality
-- **High Accuracy**: Powered by a custom CNN model trained on the Oxford 102 Flower Dataset
-- **Detailed Results**: View confidence scores and species information
-- **Mobile Friendly**: Works seamlessly across all devices
-- **Interactive FAQ**: Comprehensive guide for users
+> 📌 *Click the video link above to watch the full demo!*
 
-## 🛠️ Tech Stack
+---
 
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Backend**: Flask (Python)
-- **Deep Learning**: TensorFlow, Keras
-- **Dataset**: Oxford 102 Flower Dataset
-- **Deployment**: Docker-ready
+## 🚀 About the Project
 
-## 📋 Prerequisites
+This project leverages a trained **Ridge Regression ML model** to predict the **Fire Weather Index (FWI)** based on various weather and climate features. The app is built with Flask for the backend and a clean, responsive Tailwind CSS-based frontend.
 
-Before running the project, ensure you have:
+It’s designed for:
+- 🔥 Early wildfire detection systems
+- 🛰️ Environmental research and risk management
 
-- Python 3.8 or higher
-- pip (Python package manager)
-- Virtual environment (recommended)
-- Git
+---
 
-## 🚀 Installation
+## 🌐 Live Deployed App
 
-1. Clone the repository:
+**🖥️ [Click here to use the app →](https://forest-fire-prediction-wvfl.onrender.com/)**  
+> ⚠️ *Note: Free Render plan may take 30–60 seconds to wake up from sleep.*
+
+---
+
+## 💡 How It Works
+
+1. 🌡️ User enters weather values (Temperature, RH, Rain, etc.)
+2. 📦 Inputs are scaled and fed to a trained ML model
+3. 🧠 Ridge Regression predicts the Fire Weather Index
+4. 💬 Prediction appears instantly in a styled popup modal
+
+---
+
+## 🧪 Features
+
+- ✅ Ridge Regression Model (trained on real Algerian data)
+- 🧠 Scikit-learn preprocessor + model pickle files
+- 🌐 Live Flask app deployed on Render
+- 💻 Beautiful responsive UI using Tailwind CSS
+- 📱 Mobile-friendly form with modern input UX
+- 🔮 Prediction popup instead of redirecting to new page
+- 📂 Clean folder structure for easy collaboration
+
+---
+
+## 📂 Project Structure
+
 ```bash
-git clone https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN.git
-cd Plant_Specis_Detection_using_CNN
+├── app.py                   # Flask backend
+├── models/
+│   ├── ridge.pkl            # Trained ML model
+│   └── scaler.pkl           # StandardScaler
+├── templates/
+│   ├── index.html           # Landing page
+│   ├── predict.html         # Form page
+│   ├── footer.html          # Reusable footer
+│   └── prediction.html      # For modal result injection
+├── static/                  # Assets (optional)
+├── requirements.txt         # Dependencies
+└── README.md                # You’re reading it!
+````
+
+---
+
+## 🛠️ Built With
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&style=flat-square" />
+  <img src="https://img.shields.io/badge/Flask-2.3-black?logo=flask&style=flat-square" />
+  <img src="https://img.shields.io/badge/scikit--learn-1.7-orange?logo=scikit-learn&style=flat-square" />
+  <img src="https://img.shields.io/badge/TailwindCSS-3.0-38bdf8?logo=tailwindcss&style=flat-square" />
+  <img src="https://img.shields.io/badge/Render-Cloud-blueviolet?logo=render&style=flat-square" />
+</p>
+
+---
+
+## 🧠 ML Input Features
+
+| Feature     | Description                          |
+| ----------- | ------------------------------------ |
+| Temperature | in Celsius                           |
+| RH          | Relative Humidity (%)                |
+| WS          | Wind Speed (km/h)                    |
+| Rain        | Rainfall (mm)                        |
+| FFMC        | Fine Fuel Moisture Code              |
+| DMC         | Duff Moisture Code                   |
+| ISI         | Initial Spread Index                 |
+| Classes     | Binary class (Fire = 1, No Fire = 0) |
+| Region      | Region Code (Bejaia/Sidi-Bel-Abbes)  |
+
+---
+
+## ⚙️ Setup & Run Locally
+
+### 1️⃣ Clone the repo
+
+```bash
+git clone https://github.com/TechWithAkash/algerian_forest_fire_prediction_app.git
+cd algerian_forest_fire_prediction_app
 ```
 
-2. Create and activate a virtual environment:
+### 2️⃣ Create a virtual environment
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install required packages:
+### 3️⃣ Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Download the pre-trained model:
-```bash
-# The model will be automatically downloaded when you first run the application
-# Or you can manually place it in the models/ directory
-```
+### 4️⃣ Run the app
 
-5. Run the application:
 ```bash
 python app.py
 ```
 
-6. Open your browser and navigate to:
-```
-http://localhost:5000
-```
+Go to `http://localhost:5000` in your browser.
 
-## 📦 Project Structure
+---
 
-```
-Plant_Species_Detection/
-├── app.py                  # Flask application
-├── models/
-│   └── final_model.keras   # Trained CNN model
-├── static/
-│   ├── css/
-│   │   └── style.css      # Application styling
-│   ├── js/
-│   │   └── main.js        # Frontend functionality
-│   └── uploads/           # Temporary image storage
-├── templates/
-│   └── index.html         # Main application template
-├── requirements.txt       # Python dependencies
-└── README.md             # Project documentation
-```
+## 🙋 About the Author
 
-## 🎯 Model Architecture
+**Akash Vishwakarma**
+🚀 Passionate about AI, ML, and building powerful user-centric tools.
+📬 [Connect on LinkedIn](https://www.linkedin.com/in/akash-vishwakarma-creator/)
+🐱 [GitHub Profile](https://github.com/TechWithAkash)
 
-Our CNN model architecture:
+---
 
-- Input Layer: 128x128x3
-- Multiple Convolutional Layers with ReLU activation
-- MaxPooling Layers
-- Dropout Layers for regularization
-- Dense Layers
-- Output Layer: 102 classes (Softmax)
+## 📃 License
 
-## 📊 Performance
+This project is licensed under the MIT License.
 
-- **Accuracy**: 94.5% on validation set
-- **Response Time**: ~2 seconds per image
-- **Supported Formats**: JPG, JPEG, PNG
+---
 
-## 🤝 Contributing
+## ⭐ Show Some ❤️
 
-Contributions are welcome! Here's how you can help:
+If you found this project helpful:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+⭐ **Star this repository**
+🍴 **Fork and contribute**
+📢 **Share it on LinkedIn/Twitter**
 
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 👨‍💻 Author
-
-**Akash Kumar**
-- GitHub: [@TechWithAkash](https://github.com/TechWithAkash)
-
-## 🙏 Acknowledgments
-
-- [Oxford 102 Flower Dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
-- [TensorFlow Team](https://www.tensorflow.org/)
-- [Flask Team](https://flask.palletsprojects.com/)
-
-## 📞 Contact
-
-- **Akash Kumar**
-- Email: [vishwakarmaakshav17@gmail.com]
-- Project Link: [https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN](https://github.com/TechWithAkash/Plant_Specis_Detection_using_CNN)
+> *“Technology is best when it brings people together — even to prevent disasters.”*
